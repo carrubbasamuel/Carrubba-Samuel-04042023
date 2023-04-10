@@ -832,28 +832,42 @@ const jobs = [
 ]
 
 
-let search = [
-  job1={location: "NY, US",     position: "java dev"},
-  job2={location: "Genoa, IT",   position: "web dev"},
-  job3={location: "US",      position: "Information Technology"},
-];
 
-
-function searchAlg(){
-  let result=[];
-  let count=0;
-  for(let i=0;i<search.length;i++){
-    let location = search[i].location.toLowerCase();
-    let position = search[i].position.toLowerCase();
-    for (let j = 0; j < jobs.length; j++) {
-      if(jobs[j].location.toLowerCase().includes(location) && jobs[j].function.toLowerCase().includes(position)){
-        count++;
-        result.push(jobs[j]);
-      }
-    }
+function jobSearch(position, location) {
+  let result = [];
+  let count = 0;
+  
+  for (let i = 0; i < jobs.length; i++) {
+    let job = jobs[i];
+    let jobPosition = job.function.toLowerCase();
+    let jobLocation = job.location.toLowerCase();
     
+    if (jobPosition.includes(position.toLowerCase()) && jobLocation.includes(location.toLowerCase())) {
+      result.push({
+        job_id: job.job_id,
+        title: job.title,
+        location: job.location,
+        department: job.department,
+        salary_range: job.salary_range,
+        telecommuting: job.telecommuting,
+        has_company_logo: job.has_company_logo,
+        has_questions: job.has_questions,
+        employment_type: job.employment_type,
+        required_experience: job.required_experience,
+        required_education: job.required_education,
+        industry: job.industry,
+        function: job.function,
+        fraudulent: job.fraudulent
+      });
+      count++;
+    }
   }
-  return result;
+  
+  return { result, count };
 }
 
-console.log(searchAlg());
+
+console.log(jobSearch("webdev","Genoa,IT"));
+console.log(jobSearch("Marketing","US"));
+console.log(jobSearch("information","ny"));
+console.log(jobSearch("information","us"));
