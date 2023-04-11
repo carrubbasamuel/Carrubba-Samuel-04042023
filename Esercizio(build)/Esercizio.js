@@ -839,7 +839,7 @@ function jobSearch(position, location) {
   
   for (let i = 0; i < jobs.length; i++) {
     let job = jobs[i];
-    let jobPosition = job.function.toLowerCase();
+    let jobPosition = job.title.toLowerCase();
     let jobLocation = job.location.toLowerCase();
     
     if (jobPosition.includes(position.toLowerCase()) && jobLocation.includes(location.toLowerCase())) {
